@@ -1,3 +1,14 @@
+---
+layout:     post
+title:      "Logistic Regression"
+subtitle:   "Coursera DeepLearning week2"
+date:       2017-12-11
+author:     "HerryZ"
+header-img: "img/post-bg-js-version.jpg"
+tags:
+    - 机器学习
+---
+
 
 deeplearning.ai 是机器学习领域大牛Andrew Ng在Coursera上公布的新的深度学习的课程，相比之前机器学习的课程，本课程更偏重于深度学习的领域。
 
@@ -12,14 +23,13 @@ Logistic Regression即机器学习中的逻辑回归，它是神经网络的基�
 
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-b27546d1282e310d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+
 下图则表述了逻辑回归，这里需要注意两个概念。
 Loss(error) function: 是对于单个样本预计值与真实值的偏差
 Cost function: 是对于所有样本loss的平均值
-
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-1a856fd79fb049af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 下图则是梯度下降。
-
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-c5d8cab12708d010.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
@@ -27,7 +37,6 @@ Cost function: 是对于所有样本loss的平均值
 
 ### 计算图与前向反向传播
 在神经网络中，forward propogation 用来计算输出，back propogation用来计算梯度，在得到梯度后就可以更新对应的参数。在此我们引入Computation Graph（计算图）来描述着两个过程，来看一个简单的例子
-
 ```math
 J(a,b,c) = 3(a+bc)
 ```
@@ -38,16 +47,11 @@ J(a,b,c) = 3(a+bc)
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-26f55304a07944fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 有了计算图的概念后，我们将其运用到Logistic Regression上。如下图，我们可以将途中的式子表示为下方的计算图。
-
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-ad92ceca96fc72d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 用上面的图，我们来计算反向传播。
 \begin{align} \frac{dL}{da} & = - (\frac{y}{a} - \frac{(1-y)}{(1-a)}) \end{align}
 
-\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} 
-\leq 
-\left( \sum_{k=1}^n a_k^2 \right) 
-\left( \sum_{k=1}^n b_k^2 \right)
 
 前面我们说过，
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-55cebd5b7b4f9302.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -55,5 +59,3 @@ J(a,b,c) = 3(a+bc)
 ### 向量化
 
 ### python代码
-
-而段内插入 LaTeX 公式是这样的： $ \{\,z\in C \mid z^2 = {\alpha}\,\} $，试试看看吧

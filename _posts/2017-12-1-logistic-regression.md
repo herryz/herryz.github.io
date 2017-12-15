@@ -6,7 +6,7 @@ date:       2017-12-11
 author:     "HerryZ"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-    - 机器学习
+    - 深度学习
 ---
 
 

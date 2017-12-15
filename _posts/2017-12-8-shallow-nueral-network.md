@@ -2,11 +2,11 @@
 layout:     post
 title:      "Shallow Neural Networks"
 subtitle:   "Coursera DeepLearning week3"
-date:       2017-12-14
+date:       2017-12-8
 author:     "HerryZ"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
-    - 机器学习
+    - 深度学习
 ---
 
 

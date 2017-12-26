@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "Practical aspects of DL(1)"
+title:      "Practical aspects of DL"
 subtitle:   "Coursera-Improving Deep Neural Networks-week1"
-date:       2017-12-20
+date:       2017-12-26
 author:     "HerryZ"
 header-img: "img/contact-bg.jpg"
 tags:
@@ -11,7 +11,7 @@ tags:
 
 deeplearning.ai 是机器学习领域大牛Andrew Ng在Coursera上公布的新的深度学习的课程，相比之前机器学习的课程，本课程更偏重于深度学习的领域。
 
-本文是课程二《Improving Deep Neural Networks》的第一周笔记，本周主要内容包括：数据集分割，偏差与方差，正则化，梯度检查等，由于本周概念性的知识比较多，所以我分上下俩部分来写。
+本文是课程二《Improving Deep Neural Networks》的第一周笔记，本周主要内容包括：数据集分割，偏差与方差，正则化，梯度检查等。
 
 注：如果没有任何机器学习基础，直接学习本课程可能会有些费力，建议大家先去学习Andrew Ng机器学习课程，传送门在此 [Coursera Machine Learning](https://www.coursera.org/learn/machine-learning)
 
@@ -72,15 +72,42 @@ Dropout也是一种正则化的手段，它指的是在神经网络的训练过�
 2.Early stopping
 ![image.png](http://upload-images.jianshu.io/upload_images/3913020-d2cd134404a15404.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+### 四、归一化
+在训练神经网络之前，通常需要将数据归一化（标准化），即把数据经过处理后使其取值范围限定在一定的范围内。
+具体归一化的方式如下图，即先将数据集的每一个样本减去其均值，再将数据集的每一个样本除以其方差。
+![image.png](http://upload-images.jianshu.io/upload_images/3913020-a036da18d35feb26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 四、总结
+那么为什么需要归一化呢？如下图，未归一化处理的样本数据往往不同维度的取值范围相差甚远，这样就会影响到梯度下降的速度。见图右，归一化后损失函数的收敛速度会快很多。
+![image.png](http://upload-images.jianshu.io/upload_images/3913020-d5979a68a853d193.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 五、梯度消失/爆炸
+梯度消失/爆炸指的是随着前向传播的不断进行，激活单元的值会逐层指数级地增加或减少，从而导致梯度无线增大或趋近于零，这样会严重印象神经网络的训练，如下图。
+![image.png](http://upload-images.jianshu.io/upload_images/3913020-4616d20ab6c10be4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+有什么方法可以避免梯度消失或梯度爆炸呢？
+一种方法是用有效的参数初始化来缓解这个问题（注意它并不能完全解决这个问题），如下图。一般会初始化后输入值均值为0，标准方差为1。
+![image.png](http://upload-images.jianshu.io/upload_images/3913020-312ca1c2682f88e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 六、梯度检验
+由于神经网络计算的过程中涉及到的参数很多，反向传播计算的梯度很容易出现误差，导致最后迭代得到效果很差的参数值。为了确认反向传播计算的梯度是否正确，可以采用梯度检验（gradient check）的方法。
+如下图，通过计算数值梯度，得到梯度的近似值，然后和反向传播得到的梯度进行比较，若两者相差很小的话则证明反向传播的代码是正确无误的。
+![image.png](http://upload-images.jianshu.io/upload_images/3913020-c26efd53fa512f31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+需要注意的是：
+- 由于梯度检验的速度很慢，会影响训练的速度，所以一般只有在debug时才会用到梯度检验
+- 梯度检验对于dropout不生效
+
+### 总结
 由于本周的概念性内容过于多，所以本文主要讲了以下内容：
 - 训练集、验证集和测试集
 - 偏差与方差
 - 正则化
+- 归一化
+- 梯度消失/爆炸
+- 梯度检验
 
-下文我们将讲述归一化、梯度消失与梯度爆炸、梯度检查等内容。
-最后贴出网易云课堂的链接，有兴趣的可以关注下我的知乎或博客，链接在最下方，可以交流下学习经验哈
+最后贴出网易云课堂的链接，有兴趣的可以关注下我的知乎或博客，链接在最下方，可以交流下学习经验哈。
+有关本章所讲的正则化、归一化和梯度检验的代码实现，可以看下下面Assignments的链接。
 
 - [网易云课堂-深度学习](http://mooc.study.163.com/smartSpec/detail/1001319001.htm)
 - [Assignments](https://github.com/herryz/deeplearning_note)
